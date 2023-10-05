@@ -4,8 +4,14 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class Task0 {
-    public final static Logger LOGGER = LogManager.getLogger();
-    public static void main(String[] args) {
+
+    private final static Logger LOGGER = LogManager.getLogger();
+
+    private Task0() {
+
+    }
+
+    public static void printHello() {
         LOGGER.info("Hello, World!");
     }
 }
