@@ -11,13 +11,14 @@ public class Task2 {
 
     }
 
-    @SuppressWarnings("MagicNumber")
+    private static final int NUMBER_SYSTEM = 10;
+
     public static int countDigits(int number) {
         int currentNumber = number;
         int count = 1;
-        while (currentNumber / 10 != 0) {
+        while (currentNumber / NUMBER_SYSTEM != 0) {
             count++;
-            currentNumber = currentNumber / 10;
+            currentNumber = currentNumber / NUMBER_SYSTEM;
         }
         return count;
     }
