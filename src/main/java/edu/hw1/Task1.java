@@ -6,7 +6,8 @@ public class Task1 {
 
     }
 
-    @SuppressWarnings("MagicNumber")
+    private static final int SECONDS_IN_MINUTE = 60;
+
     static int minutesToSeconds(String time) {
         String[] values = time.split(":");
         int minutes;
@@ -19,10 +20,10 @@ public class Task1 {
             return -1;
         }
 
-        if (seconds >= 60 || seconds < 0 || minutes < 0) {
+        if (seconds >= SECONDS_IN_MINUTE || seconds < 0 || minutes < 0) {
             return -1;
         }
 
-        return minutes * 60 + seconds;
+        return minutes * SECONDS_IN_MINUTE + seconds;
     }
 }
