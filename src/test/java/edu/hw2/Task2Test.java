@@ -10,17 +10,17 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class Task2Test {
     static Arguments[] rectangles() {
         return new Arguments[]{
-            Arguments.of(new Rectangle()),
-            Arguments.of(new Square())
+            Arguments.of(new Rectangle(20, 10)),
+            Arguments.of(new Square(15))
         };
     }
 
     @ParameterizedTest
     @MethodSource("rectangles")
     void rectangleArea(Rectangle rect) {
-        rect.setWidth(20);
-        rect.setHeight(10);
+        rect = rect.setWidth(10);
+        rect = rect.setHeight(15);
 
-        assertThat(rect.area()).isEqualTo(200.0);
+        assertThat(rect.area()).isEqualTo(150.0);
     }
 }
