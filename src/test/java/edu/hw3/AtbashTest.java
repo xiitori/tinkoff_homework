@@ -1,7 +1,7 @@
 package edu.hw3;
 
+import edu.hw3.task1.Atbash;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.function.Executable;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
