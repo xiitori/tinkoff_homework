@@ -25,9 +25,15 @@ public class AtbashTest {
     }
 
     @Test
-
     void emptyStringTest() {
         String result = Atbash.atbash("");
         assertThat(result).isEqualTo("");
+    }
+
+    @Test
+    void nullTest() {
+        assertThrows(NullPointerException.class, () -> {
+           Atbash.atbash(null);
+        });
     }
 }
