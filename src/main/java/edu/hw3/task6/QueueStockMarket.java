@@ -1,7 +1,6 @@
 package edu.hw3.task6;
 
 import java.util.PriorityQueue;
-import java.util.Queue;
 
 public class QueueStockMarket implements StockMarket {
 
