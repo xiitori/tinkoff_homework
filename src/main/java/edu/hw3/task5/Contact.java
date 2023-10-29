@@ -9,12 +9,7 @@ public class Contact {
 
     private String surname;
 
-    private static final Pattern REGEX = Pattern.compile("[а-яА-Яa-zA-Z]+(\\s)[а-яА-Яa-zA-Z]*$");
-
-    public Contact(String name, String surname) {
-        this.name = name;
-        this.surname = surname;
-    }
+    private static final Pattern REGEX = Pattern.compile("[а-яА-Яa-zA-Z]+(\\s)?[а-яА-Яa-zA-Z]*$");
 
     public Contact(String data) {
         Matcher matcher = REGEX.matcher(data.toLowerCase());
@@ -28,27 +23,15 @@ public class Contact {
         }
     }
 
-    public Contact() {
-
-    }
-
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getSurname() {
         return surname;
     }
 
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
-
     @Override public String toString() {
-        return name + " " + surname;
+        return name == null ? "" : name + (surname == null ? "" : " " + surname);
     }
 }

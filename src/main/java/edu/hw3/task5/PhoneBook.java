@@ -15,9 +15,9 @@ public class PhoneBook {
         }
         Arrays.sort(contacts, ((o1, o2) -> {
             String firstComparable = o1.getSurname() == null
-                ? (o1.getName() == null ? "" : o1.getName()) : o1.getSurname();
+                ? o1.getName() : o1.getSurname();
             String secondComparable = o2.getSurname() == null
-                ? (o2.getName() == null ? "" : o2.getName()) : o2.getSurname();
+                ? o2.getName() : o2.getSurname();
             return firstComparable.compareTo(secondComparable) * (type == SortTypes.ASC ? 1 : -1);
         }));
         return contacts;
