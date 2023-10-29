@@ -7,9 +7,9 @@ public class FaultyConnection implements Connection {
 
     private static final Logger LOGGER = LogManager.getLogger();
 
-    private static int exceptionCounter = 0;
-
     private static final int EXCEPTION_FREQUENCY = 3;
+
+    private static int exceptionCounter = 0;
 
     @Override
     public void execute(String command) {
