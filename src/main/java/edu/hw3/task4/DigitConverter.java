@@ -32,7 +32,7 @@ public class DigitConverter {
 
     public static String convertToRoman(int arabian) {
         if (arabian <= 0 || arabian > MAX_CONVERTIBLE) {
-            return "";
+            throw new IllegalArgumentException();
         }
         int digit = arabian;
         StringBuilder romanDigit = new StringBuilder();
