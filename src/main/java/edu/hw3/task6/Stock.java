@@ -16,10 +16,6 @@ public class Stock implements Comparable<Stock> {
         return value;
     }
 
-    public String getName() {
-        return name;
-    }
-
     @Override
     public int compareTo(@NotNull Stock o) {
         return o.value - this.value;
