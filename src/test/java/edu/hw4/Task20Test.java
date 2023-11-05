@@ -19,7 +19,7 @@ public class Task20Test {
         new Animal("xatiko", Animal.Type.DOG, Animal.Sex.M, 4, 40, 10, true),
         new Animal("kolibri", Animal.Type.BIRD, null, 2, 5, 1, false),
         new Animal("kambala", Animal.Type.FISH, Animal.Sex.M, 40, 55, 600000, false),
-        new Animal("pauk", Animal.Type.SPIDER, Animal.Sex.F, 822, 1000000, 1, true),
+        new Animal("pauk", Animal.Type.SPIDER, Animal.Sex.F, 82, 1000000, 1, true),
         new Animal("black widow", Animal.Type.SPIDER, Animal.Sex.F, 8, 1, 1, true),
         new Animal("eagle", Animal.Type.BIRD, Animal.Sex.M, 300, 75, 4,  false)
     );
@@ -31,7 +31,7 @@ public class Task20Test {
             "xatiko", "[]",
             "kolibri", "[" + NULL_FIELD.name() + "]",
             "kambala","[" +  INCORRECT_WEIGHT.name() + "]",
-            "pauk", "[" + INCORRECT_AGE.name() + ", " + INCORRECT_HEIGHT.name() + "]",
+            "pauk", "[" + INCORRECT_HEIGHT.name() + "]",
             "black widow", "[]",
             "eagle", "[" + INCORRECT_AGE.name() + "]"
         );
