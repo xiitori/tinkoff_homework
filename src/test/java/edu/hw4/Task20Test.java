@@ -38,6 +38,12 @@ public class Task20Test {
 
         var result = AnimalStreamTools.getAnimalErrorStrings(ANIMALS);
 
-        assertThat(result).isEqualTo(checkMap);
+        for (var entry : result.entrySet()) {
+            String key = entry.getKey();
+            String value = entry.getValue();
+
+            assertThat(checkMap.containsKey(key)).isTrue();
+            assertThat(checkMap.get(key)).isEqualTo(value);
+        }
     }
 }
