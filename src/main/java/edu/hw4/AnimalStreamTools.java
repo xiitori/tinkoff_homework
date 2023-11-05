@@ -84,17 +84,17 @@ public class AnimalStreamTools {
 
     //task13
     public static List<Animal> listAnimalsTwoWordsName(List<Animal> list) {
-        return list.stream().filter(a1 -> a1.name().split(" ").length > 2).toList();
+        return list.stream().filter(a1 -> a1.name().split(" ").length > 1).toList();
     }
 
     //task14
-    public static Boolean findDogOver100(List<Animal> list, int k) {
+    public static Boolean findDogOverK(List<Animal> list, int k) {
         return list.stream().anyMatch(a1 -> a1.type() == Animal.Type.DOG && a1.height() > k);
     }
 
     //task15
     public static Map<Animal.Type, Integer> sumWeightWithCertainHeight(List<Animal> list, int k, int l) {
-        return list.stream().filter(a1 -> a1.height() > k && a1.height() < l)
+        return list.stream().filter(a1 -> a1.height() >= k && a1.height() < l)
             .collect(Collectors.groupingBy(Animal::type, Collectors.summingInt(Animal::weight)));
     }
 
