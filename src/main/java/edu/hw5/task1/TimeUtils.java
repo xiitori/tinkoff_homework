@@ -8,35 +8,47 @@ import java.util.regex.Pattern;
 
 public class TimeUtils {
 
-    private static final Pattern dateTimePattern = Pattern.compile("(\\d{4})-(\\d{2})-(\\d{2}), (\\d{2}):(\\d{2})");
+    private static final Pattern DATE_TIME_PATTERN = Pattern.compile("(\\d{4})-(\\d{2})-(\\d{2}), (\\d{2}):(\\d{2})");
+
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd, HH:mm");
 
     private TimeUtils() {
 
     }
 
-    public static Duration getTimeSession(List<String> sessions) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd, HH:mm");
-
-        var resultDuration = Duration.ZERO;
+    public static String getTimeSession(List<String> sessions) {
+        var averageDuration = Duration.ZERO;
 
         for (String session : sessions) {
-            var matcher = dateTimePattern.matcher(session);
+            var matcher = DATE_TIME_PATTERN.matcher(session);
 
             if (!matcher.find()) {
-                throw new IllegalArgumentException();
+                throw new ParseDateException();
             }
-            LocalDateTime firstDate = LocalDateTime.parse(session.substring(matcher.start(), matcher.end()), formatter);
+            int startIndex = matcher.start();
+            int endIndex = matcher.end();
+
+            LocalDateTime firstDate = LocalDateTime.parse(session.substring(startIndex, endIndex), FORMATTER);
 
             if (!matcher.find()) {
-                throw new IllegalArgumentException();
+                throw new ParseDateException();
             }
-            LocalDateTime secondDate = LocalDateTime.parse(session.substring(matcher.start(), matcher.end()), formatter);
+            startIndex = matcher.start();
+            endIndex = matcher.end();
+
+            LocalDateTime secondDate = LocalDateTime.parse(session.substring(startIndex, endIndex), FORMATTER);
 
             var duration = Duration.between(firstDate, secondDate);
 
-            resultDuration = resultDuration.plus(duration);
+            if (duration.isNegative()) {
+                throw new IllegalArgumentException();
+            }
+
+            averageDuration = averageDuration.plus(duration);
         }
 
-        return resultDuration.dividedBy(sessions.size());
+        averageDuration = averageDuration.dividedBy(sessions.size());
+
+        return averageDuration.toString();
     }
 }
