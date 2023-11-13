@@ -39,7 +39,6 @@ public class Task5Test {
     @DisplayName("Невалидные данные")
     @MethodSource("illegalPlateNumbers")
     void illegalPlateNumbersTest(String plateNumber) {
-
-
+        assertThat(NumberPlateValidator.validate(plateNumber)).isFalse();
     }
 }
