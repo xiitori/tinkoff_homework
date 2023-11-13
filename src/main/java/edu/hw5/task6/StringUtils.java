@@ -4,9 +4,12 @@ import java.util.regex.Pattern;
 
 public class StringUtils {
 
-    public static boolean isSubstring(String original, String sub) {
+    public static boolean isSubstring(String main, String sub) {
+        if (sub.isEmpty()) {
+            throw new IllegalArgumentException();
+        }
         Pattern pattern = Pattern.compile(sub);
-        var matcher = pattern.matcher(original);
+        var matcher = pattern.matcher(main);
         return matcher.find();
     }
 
