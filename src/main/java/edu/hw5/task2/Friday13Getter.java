@@ -3,6 +3,7 @@ package edu.hw5.task2;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.Month;
+import java.time.temporal.TemporalAdjusters;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -35,5 +36,15 @@ public class Friday13Getter {
             currentDate = currentDate.plusMonths(1);
         }
         return list;
+    }
+
+    public static LocalDate getNextFriday13(LocalDate date) {
+        LocalDate currentDate = date;
+
+        do {
+            currentDate = currentDate.with(TemporalAdjusters.next(DayOfWeek.FRIDAY));
+        } while (currentDate.getDayOfMonth() != THIRTEENTH);
+
+        return currentDate;
     }
 }
