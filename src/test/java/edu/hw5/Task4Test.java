@@ -10,7 +10,7 @@ public class Task4Test {
     @Test
     @DisplayName("Тест валидных данных")
     void validatePasswordTest() {
-        String correctPassword = "qwerty123#";
+        String correctPassword = "qwe@rty123";
         String incorrectPassword = "fdjbbfnljbveq";
 
         boolean firstAnswer = PasswordValidator.validate(correctPassword);
