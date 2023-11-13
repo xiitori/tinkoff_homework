@@ -4,6 +4,9 @@ import java.util.regex.Pattern;
 
 public class StringUtils {
 
+    private StringUtils() {
+    }
+
     public static boolean isSubstring(String main, String sub) {
         if (sub.isEmpty()) {
             throw new IllegalArgumentException();
