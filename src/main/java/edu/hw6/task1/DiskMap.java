@@ -39,8 +39,8 @@ public class DiskMap implements Map<String, String> {
 
         try {
             var list = Files.readAllLines(source);
-            for (String record : list) {
-                Entry entry = new Entry(record);
+            for (String rec : list) {
+                Entry entry = new Entry(rec);
                 String entryString = entry.getFileRecord();
                 Files.write(path, entryString.getBytes(), StandardOpenOption.APPEND);
                 size++;
@@ -75,8 +75,8 @@ public class DiskMap implements Map<String, String> {
     public boolean containsKey(Object key) {
         try {
             var list = Files.readAllLines(path);
-            for (String record : list) {
-                Entry entry = new Entry(record);
+            for (String rec : list) {
+                Entry entry = new Entry(rec);
                 if (entry.key.equals(key)) {
                     return true;
                 }
@@ -91,8 +91,8 @@ public class DiskMap implements Map<String, String> {
     public boolean containsValue(Object value) {
         try {
             var list = Files.readAllLines(path);
-            for (String record : list) {
-                Entry entry = new Entry(record);
+            for (String rec : list) {
+                Entry entry = new Entry(rec);
                 if (entry.value.equals(value)) {
                     return true;
                 }
@@ -107,8 +107,8 @@ public class DiskMap implements Map<String, String> {
     public String get(Object key) {
         try {
             var list = Files.readAllLines(path);
-            for (String record : list) {
-                Entry entry = new Entry(record);
+            for (String rec : list) {
+                Entry entry = new Entry(rec);
                 if (entry.key.equals(key)) {
                     return entry.value;
                 }
@@ -142,8 +142,8 @@ public class DiskMap implements Map<String, String> {
         String value = "";
         try {
             var list = Files.readAllLines(path);
-            for (String record : list) {
-                Entry entry = new Entry(record);
+            for (String rec : list) {
+                Entry entry = new Entry(rec);
                 if (entry.key != key) {
                     String entryString = entry.getFileRecord();
                     Files.write(path, entryString.getBytes(), StandardOpenOption.APPEND);

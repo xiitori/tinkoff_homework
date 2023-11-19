@@ -11,7 +11,8 @@ public class FileCloner {
 
     public static Path cloneFile(Path path) {
         String fileName = path.getFileName().toString();
-        String baseName, extension;
+        String baseName;
+        String extension;
         if (path.toString().contains(".")) {
             baseName = fileName.substring(0, fileName.lastIndexOf("."));
             extension = fileName.substring(fileName.lastIndexOf("."));
@@ -24,7 +25,8 @@ public class FileCloner {
         Path copyPath = Path.of(path.getParent().toString() + "\\" + baseName + " — копия" + extension);
         while (Files.exists(copyPath)) {
             copyNumber++;
-            copyPath = Path.of(path.getParent().toString() + "\\" + baseName + " — копия(" + copyNumber + ")" + extension);
+            copyPath =
+                Path.of(path.getParent().toString() + "\\" + baseName + " — копия(" + copyNumber + ")" + extension);
         }
 
         try {

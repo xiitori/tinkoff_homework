@@ -1,7 +1,6 @@
 package edu.hw6.task3;
 
 import java.nio.file.Files;
-import java.util.regex.Pattern;
 
 public class Filters {
 
