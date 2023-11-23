@@ -1,6 +1,8 @@
 package edu.hw6.task3;
 
 import java.nio.file.Files;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Filters {
 
@@ -24,13 +26,11 @@ public class Filters {
     }
 
     public static AbstractFilter regexContains(String regex) {
-        return e -> e.toString().matches(regex);
+        return e -> {
+            String fileName = e.getFileName().toString();
+            Pattern pattern = Pattern.compile(regex);
+            Matcher matcher = pattern.matcher(fileName);
+            return matcher.find();
+        };
     }
-
-//    public static AbstractFilter magicNumber(String str) {
-//        String fileName = "/path/to/file";
-//        MimetypesFileTypeMap mimeTypesMap = new MimetypesFileTypeMap();
-//        String mimeType = mimeTypesMap.getContentType(fileName);
-//        return e -> Files.getPosixFilePermissions(e).contains();
-//    }
 }

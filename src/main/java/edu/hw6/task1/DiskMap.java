@@ -2,7 +2,6 @@ package edu.hw6.task1;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.nio.channels.FileChannel;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
@@ -21,7 +20,7 @@ public class DiskMap implements Map<String, String> {
 
     private int size = 0;
 
-    private final Path path = Path.of("src/main/java/edu/hw6/task1/DiskMap.txt");
+    private final Path path = Path.of("src/main/resources/hw6/task1/DiskMap.txt");
 
     public DiskMap() {
         try {
@@ -51,7 +50,7 @@ public class DiskMap implements Map<String, String> {
     }
 
     public Path saveIntoFile() {
-        Path savePath = Path.of("src/main/java/edu/hw6/task1/" + this + "save");
+        Path savePath = Path.of("src/main/resources/hw6/task1/" + this + "save");
         try {
             Files.createFile(savePath);
             Files.copy(path, savePath);
@@ -173,7 +172,7 @@ public class DiskMap implements Map<String, String> {
     @Override
     public void clear() {
         try {
-            FileChannel.open(path).truncate(0).close();
+            Files.writeString(path, "");
             size = 0;
         } catch (IOException e) {
             throw new RuntimeException(e);
