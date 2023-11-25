@@ -7,7 +7,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class Task2Test {
+public class FileClonerTest {
 
     private static final Path PATH = Path.of("src/main/resources/hw6/task2/file.txt");
     @Test
