@@ -6,7 +6,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
-import edu.hw6.task3.Filters;
 import org.junit.jupiter.api.Test;
 import static edu.hw6.task3.Filters.IS_DIRECTORY;
 import static edu.hw6.task3.Filters.IS_READABLE;
@@ -44,7 +43,9 @@ public class FilterTest {
     @Test
     void globMatchesTest() throws IOException {
         DirectoryStream.Filter<Path> filter = globMatches("txt");
-        List<Path> answer = new ArrayList<>(List.of(EXAMPLE, MATCHES));
+        List<Path> answer = new ArrayList<>();
+        answer.add(EXAMPLE);
+        answer.add(MATCHES);
 
         List<Path> entries = new ArrayList<>();
         Files.newDirectoryStream(PATH, filter).forEach(entries::add);
