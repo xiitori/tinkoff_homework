@@ -50,7 +50,7 @@ public class DiskMap implements Map<String, String> {
     }
 
     public void saveIntoFile(Path savePath) {
-        if(Files.exists(savePath)) {
+        if (Files.exists(savePath)) {
             throw new IllegalArgumentException();
         }
         try {
