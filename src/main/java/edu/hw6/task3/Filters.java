@@ -6,11 +6,11 @@ import java.util.regex.Pattern;
 
 public class Filters {
 
-    public static final AbstractFilter REGULAR_FILE = Files::isRegularFile;
+    public static final AbstractFilter IS_REGULAR_FILE = Files::isRegularFile;
 
-    public static final AbstractFilter READABLE = Files::isReadable;
+    public static final AbstractFilter IS_READABLE = Files::isReadable;
 
-    public static final AbstractFilter WRITEABLE = Files::isWritable;
+    public static final AbstractFilter IS_WRITABLE = Files::isWritable;
 
     public static final AbstractFilter IS_DIRECTORY = Files::isDirectory;
 
@@ -22,7 +22,7 @@ public class Filters {
     }
 
     public static AbstractFilter globMatches(String glob) {
-        return e -> e.getFileName().toString().matches("([\\w\\s]+\\." + glob + ")");
+        return e -> e.getFileName().toString().matches("(.)+\\." + glob + "$");
     }
 
     public static AbstractFilter regexContains(String regex) {
