@@ -31,7 +31,7 @@ public class FilterTest {
 
     @Test
     void largerThanTest() throws IOException {
-        DirectoryStream.Filter<Path> filter = largerThan(10);
+        DirectoryStream.Filter<Path> filter = largerThan(200);
 
         List<Path> entries = new ArrayList<>();
         Files.newDirectoryStream(PATH, filter).forEach(entries::add);
