@@ -32,47 +32,47 @@ public class FilterTest {
     @Test
     void largerThanTest() throws IOException {
         DirectoryStream.Filter<Path> filter = largerThan(10);
-        List<Path> answer = new ArrayList<>(List.of(EXAMPLE, PDF));
 
         List<Path> entries = new ArrayList<>();
         Files.newDirectoryStream(PATH, filter).forEach(entries::add);
 
-        assertThat(entries.equals(answer)).isTrue();
+        assertThat(entries.size()).isEqualTo(2);
+        assertThat(entries.contains(PDF)).isTrue();
+        assertThat(entries.contains(EXAMPLE)).isTrue();
     }
 
     @Test
     void globMatchesTest() throws IOException {
         DirectoryStream.Filter<Path> filter = globMatches("txt");
-        List<Path> answer = new ArrayList<>();
-        answer.add(EXAMPLE);
-        answer.add(MATCHES);
 
         List<Path> entries = new ArrayList<>();
         Files.newDirectoryStream(PATH, filter).forEach(entries::add);
 
-        assertThat(entries.equals(answer)).isTrue();
+        assertThat(entries.size()).isEqualTo(2);
+        assertThat(entries.contains(MATCHES)).isTrue();
+        assertThat(entries.contains(EXAMPLE)).isTrue();
     }
 
     @Test
     void regexContainsTest() throws IOException {
         DirectoryStream.Filter<Path> filter = regexContains("(\\d{2}@!\\d)");
-        List<Path> answer = new ArrayList<>(List.of(MATCHES));
 
         List<Path> entries = new ArrayList<>();
         Files.newDirectoryStream(PATH, filter).forEach(entries::add);
 
-        assertThat(entries.equals(answer)).isTrue();
+        assertThat(entries.size()).isEqualTo(1);
+        assertThat(entries.contains(MATCHES)).isTrue();
     }
 
     @Test
     void isDirectoryTest() throws IOException {
         DirectoryStream.Filter<Path> filter = IS_DIRECTORY;
-        List<Path> answer = new ArrayList<>(List.of(DIRECTORY));
 
         List<Path> entries = new ArrayList<>();
         Files.newDirectoryStream(PATH, filter).forEach(entries::add);
 
-        assertThat(entries.equals(answer)).isTrue();
+        assertThat(entries.size()).isEqualTo(1);
+        assertThat(entries.contains(DIRECTORY)).isTrue();
     }
 
     @Test
@@ -87,6 +87,7 @@ public class FilterTest {
         List<Path> entries = new ArrayList<>();
         Files.newDirectoryStream(PATH, filter).forEach(entries::add);
 
-        assertThat(entries.equals(answer)).isTrue();
+        assertThat(entries.size()).isEqualTo(1);
+        assertThat(entries.contains(MATCHES)).isTrue();
     }
 }
