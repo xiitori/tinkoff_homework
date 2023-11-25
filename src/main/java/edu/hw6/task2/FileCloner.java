@@ -22,11 +22,11 @@ public class FileCloner {
         }
 
         int copyNumber = 0;
-        Path copyPath = Path.of(path.getParent().toString() + "\\" + baseName + " — копия" + extension);
+        Path copyPath = Path.of(path.getParent().toString() + "/" + baseName + " — копия" + extension);
         while (Files.exists(copyPath)) {
             copyNumber++;
             copyPath =
-                Path.of(path.getParent().toString() + "\\" + baseName + " — копия(" + copyNumber + ")" + extension);
+                Path.of(path.getParent().toString() + "/" + baseName + " — копия(" + copyNumber + ")" + extension);
         }
 
         try {
