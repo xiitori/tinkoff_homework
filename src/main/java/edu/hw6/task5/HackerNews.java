@@ -14,10 +14,7 @@ public class HackerNews {
 
     private static final int MAX_TIMEOUT = 10;
 
-    private HackerNews() {
-    }
-
-    public static long[] hackerNewsTopStories() throws IOException, InterruptedException, URISyntaxException {
+    public long[] hackerNewsTopStories() throws IOException, InterruptedException, URISyntaxException {
         var request = HttpRequest.newBuilder()
             .uri(new URI("https://hacker-news.firebaseio.com/v0/topstories.json"))
             .GET()
@@ -35,7 +32,7 @@ public class HackerNews {
         return new URI(uri);
     }
 
-    public static String news(long id) throws URISyntaxException, IOException, InterruptedException {
+    public String news(long id) throws URISyntaxException, IOException, InterruptedException {
         var uri = getURIById(id);
         var request = HttpRequest.newBuilder()
             .uri(uri)
