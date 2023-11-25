@@ -49,15 +49,15 @@ public class DiskMap implements Map<String, String> {
         }
     }
 
-    public Path saveIntoFile() {
-        Path savePath = Path.of("src/main/resources/hw6/task1/" + this + "save");
+    public void saveIntoFile(Path savePath) {
+        if(Files.exists(savePath)) {
+            throw new IllegalArgumentException();
+        }
         try {
-            Files.createFile(savePath);
             Files.copy(path, savePath);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        return savePath;
     }
 
     @Override
@@ -115,7 +115,7 @@ public class DiskMap implements Map<String, String> {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        return "";
+        return null;
     }
 
     @Nullable
