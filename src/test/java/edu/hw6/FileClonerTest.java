@@ -16,7 +16,7 @@ public class FileClonerTest {
         var pathContent = Files.readAllLines(PATH);
         var resultContent = Files.readAllLines(result);
 
-        assertThat(result.getFileName().toString()).isEqualTo("file — копия.txt");
+        assertThat(result).isEqualTo(Path.of("src/main/resources/hw6/task2/file — копия.txt"));
         assertThat(pathContent).isEqualTo(resultContent);
 
         Files.delete(result);
@@ -30,10 +30,10 @@ public class FileClonerTest {
         var firstContent = Files.readAllLines(first);
         var secondContent = Files.readAllLines(second);
 
-        assertThat(first.getFileName().toString()).isEqualTo("file — копия.txt");
+        assertThat(first).isEqualTo(Path.of("src/main/resources/hw6/task2/file — копия.txt"));
         assertThat(pathContent).isEqualTo(firstContent);
 
-        assertThat(second.getFileName().toString()).isEqualTo("file — копия(1).txt");
+        assertThat(second).isEqualTo(Path.of("src/main/resources/hw6/task2/file — копия(1).txt"));
         assertThat(pathContent).isEqualTo(secondContent);
 
         Files.delete(first);
