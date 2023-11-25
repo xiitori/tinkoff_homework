@@ -37,7 +37,7 @@ public class FilterTest {
         List<Path> entries = new ArrayList<>();
         Files.newDirectoryStream(PATH, filter).forEach(entries::add);
 
-        assertThat(entries).isEqualTo(answer);
+        assertThat(entries.equals(answer)).isTrue();
     }
 
     @Test
@@ -50,7 +50,7 @@ public class FilterTest {
         List<Path> entries = new ArrayList<>();
         Files.newDirectoryStream(PATH, filter).forEach(entries::add);
 
-        assertThat(entries).isEqualTo(answer);
+        assertThat(entries.equals(answer)).isTrue();
     }
 
     @Test
@@ -61,7 +61,7 @@ public class FilterTest {
         List<Path> entries = new ArrayList<>();
         Files.newDirectoryStream(PATH, filter).forEach(entries::add);
 
-        assertThat(entries).isEqualTo(answer);
+        assertThat(entries.equals(answer)).isTrue();
     }
 
     @Test
@@ -72,7 +72,7 @@ public class FilterTest {
         List<Path> entries = new ArrayList<>();
         Files.newDirectoryStream(PATH, filter).forEach(entries::add);
 
-        assertThat(entries).isEqualTo(answer);
+        assertThat(entries.equals(answer)).isTrue();
     }
 
     @Test
@@ -87,6 +87,6 @@ public class FilterTest {
         List<Path> entries = new ArrayList<>();
         Files.newDirectoryStream(PATH, filter).forEach(entries::add);
 
-        assertThat(entries).isEqualTo(answer);
+        assertThat(entries.equals(answer)).isTrue();
     }
 }
