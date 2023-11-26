@@ -1,16 +1,17 @@
 package edu.hw7.task1;
 
 import org.junit.jupiter.api.Test;
-import java.util.concurrent.atomic.AtomicInteger;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class IncrementerTest {
     @Test
     void incrementTest() {
-        Incrementer incrementer = new Incrementer(new AtomicInteger(0));
+        Incrementer incrementer = new Incrementer(0);
 
-        var result = incrementer.increment100_000();
+        var first = incrementer.incrementByThreads(1000, 10);
+        var second = incrementer.incrementByThreads(23000, 5);
 
-        assertThat(result.get()).isEqualTo(100000);
+        assertThat(first).isEqualTo(10000);
+        assertThat(second).isEqualTo(125000);
     }
 }

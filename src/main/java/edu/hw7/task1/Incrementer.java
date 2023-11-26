@@ -11,25 +11,23 @@ import java.util.stream.Stream;
 
 public class Incrementer {
 
-    private static final int COUNT_THREADS = 5;
-
     private final AtomicInteger counter;
 
-    public Incrementer(AtomicInteger integer) {
-        counter = integer;
+    public Incrementer(int integer) {
+        counter = new AtomicInteger(integer);
     }
 
 
-    public AtomicInteger increment100_000() {
-        ExecutorService executorService = Executors.newFixedThreadPool(COUNT_THREADS);
+    public int incrementByThreads(int countIncrement, int countThreads) {
+        ExecutorService executorService = Executors.newFixedThreadPool(countThreads);
         Callable<Void> task = () -> {
-            for (int i = 0; i < 20000; i++) {
+            for (int i = 0; i < countIncrement; i++) {
                 counter.incrementAndGet();
             }
             return null;
         };
 
-        var tasks = Stream.generate(() -> task).limit(COUNT_THREADS).toList();
+        var tasks = Stream.generate(() -> task).limit(countThreads).toList();
 
         try {
             List<Future<Void>> futures = executorService.invokeAll(tasks);
@@ -41,6 +39,6 @@ public class Incrementer {
         }
         executorService.shutdown();
 
-        return counter;
+        return counter.get();
     }
 }
