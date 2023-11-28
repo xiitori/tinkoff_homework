@@ -41,6 +41,12 @@ public class ClusterizatorTest {
         assertThrows(IllegalArgumentException.class, () -> {
             Clusterizator.clusterize("((())(())(()(()()))((()))");
         });
+    }
 
+    @Test
+    void invertedBraceStringTest() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            Clusterizator.clusterize(")(");
+        });
     }
 }
