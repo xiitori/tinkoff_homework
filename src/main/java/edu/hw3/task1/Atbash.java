@@ -2,6 +2,10 @@ package edu.hw3.task1;
 
 public class Atbash {
 
+    private static final int MIN_CHAR_VALUE = 97;
+
+    private static final int MAX_CHAR_VALUE = 122;
+
     private Atbash() {
 
     }
@@ -25,11 +29,11 @@ public class Atbash {
             findLetter = letter;
         }
 
-        if (findLetter < 97 || findLetter > 122) {
+        if (findLetter < MIN_CHAR_VALUE || findLetter > MAX_CHAR_VALUE) {
             return letter;
         }
 
-        char resultLetter = (char) (122 - (findLetter - 97));
+        char resultLetter = (char) (MAX_CHAR_VALUE - (findLetter - MIN_CHAR_VALUE));
 
         return isUpperCase ? Character.toUpperCase(resultLetter) : resultLetter;
     }
