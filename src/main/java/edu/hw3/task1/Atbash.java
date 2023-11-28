@@ -6,9 +6,6 @@ public class Atbash {
 
     }
 
-    private static final char[] DICTIONARY = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n',
-        'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
-
     public static String atbash(String string) {
         StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < string.length(); i++) {
@@ -28,12 +25,12 @@ public class Atbash {
             findLetter = letter;
         }
 
-        for (int i = 0; i < DICTIONARY.length; i++) {
-            if (DICTIONARY[i] == findLetter) {
-                return isUpperCase ? Character.toUpperCase(DICTIONARY[DICTIONARY.length - 1 - i])
-                    : DICTIONARY[DICTIONARY.length - 1 - i];
-            }
+        if (findLetter < 97 || findLetter > 122) {
+            return letter;
         }
-        return letter;
+
+        char resultLetter = (char) (122 - (findLetter - 97));
+
+        return isUpperCase ? Character.toUpperCase(resultLetter) : resultLetter;
     }
 }
