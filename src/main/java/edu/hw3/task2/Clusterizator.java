@@ -21,6 +21,9 @@ public class Clusterizator {
             } else {
                 throw new IllegalArgumentException();
             }
+            if (braceCount < 0) {
+                throw new IllegalArgumentException();
+            }
             stringBuilder.append(brace);
             if (braceCount == 0) {
                 result.add(stringBuilder.toString());
