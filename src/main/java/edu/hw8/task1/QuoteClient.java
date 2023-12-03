@@ -1,32 +1,38 @@
 package edu.hw8.task1;
 
-import java.io.BufferedReader;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
-import java.net.InetAddress;
-import java.net.Socket;
-import java.util.LinkedList;
-import java.util.List;
+import java.net.InetSocketAddress;
+import java.nio.ByteBuffer;
+import java.nio.channels.SocketChannel;
 
 public class QuoteClient {
 
-    private static final int PORT = 18080;
+    private static final int PORT = 5453;
 
-    public List<String> doRequest(String request) throws IOException {
-        Socket client = new Socket(InetAddress.getByName("localhost"), PORT);
+    private static final Logger LOGGER = LogManager.getLogger();
 
-        PrintWriter writer = new PrintWriter(client.getOutputStream(), true);
-        writer.println(request);
-        writer.flush();
+    private final SocketChannel connection;
 
-        var list = new LinkedList<String>();
+    private QuoteClient() throws IOException {
+        LOGGER.info("Getting connection with server...");
+        connection = SocketChannel.open(new InetSocketAddress(PORT));
+        LOGGER.info("Connection is made!");
+    }
 
-        new BufferedReader(new InputStreamReader(client.getInputStream())).lines().forEach(list::add);
+    public static QuoteClient start() throws IOException {
+        return new QuoteClient();
+    }
 
-        client.close();
-
-        return list;
+    public String doRequest(String request) throws IOException {
+        ByteBuffer buffer = ByteBuffer.wrap(request.getBytes());
+        LOGGER.info("Sending request to the server...");
+        connection.write(buffer);
+        buffer = ByteBuffer.allocate(2048);
+        connection.read(buffer);
+        LOGGER.info("Response is received!");
+        return new String(buffer.array()).trim();
     }
 
 }

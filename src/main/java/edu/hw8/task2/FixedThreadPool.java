@@ -1,31 +1,58 @@
 package edu.hw8.task2;
 
+import java.util.Queue;
+import java.util.concurrent.ConcurrentLinkedQueue;
+
 public class FixedThreadPool implements ThreadPool {
+    private final Queue<Runnable> workQueue = new ConcurrentLinkedQueue<>();
 
-    private final int countThreads;
+    private int countWorkers = 0;
 
-    private final Thread[] threads;
+    private final int nThreads;
+    private volatile boolean isRunning = true;
 
     private FixedThreadPool(int nThreads) {
-        countThreads = nThreads;
-        threads = new Thread[countThreads];
+        this.nThreads = nThreads;
     }
 
-    public ThreadPool create(int countThreads) {
-        return new FixedThreadPool(countThreads);
+    public static FixedThreadPool create(int nThreads) {
+        return new FixedThreadPool(nThreads);
     }
+
     @Override
     public void start() {
-
+        new Thread(new Worker()).start();
     }
 
     @Override
-    public void execute(Runnable runnable) {
-
+    public void execute(Runnable command) {
+        if (isRunning) {
+            if (countWorkers < nThreads) {
+                new Thread(new Worker()).start();
+            }
+            workQueue.offer(command);
+        }
     }
 
     @Override
-    public void close() throws Exception {
+    public void close() {
+        isRunning = false;
+    }
 
+    private final class Worker implements Runnable {
+
+        public Worker() {
+            countWorkers++;
+        }
+
+        @Override
+        public void run() {
+            while (isRunning) {
+                Runnable nextTask = workQueue.poll();
+                if (nextTask != null) {
+                    nextTask.run();
+                }
+            }
+        }
     }
 }
