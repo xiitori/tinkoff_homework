@@ -1,15 +1,17 @@
 package edu.hw8.task1;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
 import java.nio.channels.SocketChannel;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class QuoteClient {
 
     private static final int PORT = 5453;
+
+    private static final int BUFFER_SIZE = 2048;
 
     private static final Logger LOGGER = LogManager.getLogger();
 
@@ -29,7 +31,7 @@ public class QuoteClient {
         ByteBuffer buffer = ByteBuffer.wrap(request.getBytes());
         LOGGER.info("Sending request to the server...");
         connection.write(buffer);
-        buffer = ByteBuffer.allocate(2048);
+        buffer = ByteBuffer.allocate(BUFFER_SIZE);
         connection.read(buffer);
         LOGGER.info("Response is received!");
         return new String(buffer.array()).trim();

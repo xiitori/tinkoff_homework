@@ -41,7 +41,7 @@ public class FixedThreadPool implements ThreadPool {
 
     private final class Worker implements Runnable {
 
-        public Worker() {
+        Worker() {
             countWorkers++;
         }
 

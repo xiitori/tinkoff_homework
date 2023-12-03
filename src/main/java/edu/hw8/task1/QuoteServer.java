@@ -1,7 +1,5 @@
 package edu.hw8.task1;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
@@ -9,10 +7,14 @@ import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class QuoteServer {
 
     private static final int MAX_CONNECTIONS = 5;
+
+    private static final int BUFFER_SIZE = 5;
     private static final int PORT = 5453;
     private static final Logger LOGGER = LogManager.getLogger();
 
@@ -48,7 +50,7 @@ public class QuoteServer {
 
     private void response(SocketChannel client) throws IOException {
         LOGGER.info("Getting request from the client...");
-        ByteBuffer buffer = ByteBuffer.allocate(2048);
+        ByteBuffer buffer = ByteBuffer.allocate(BUFFER_SIZE);
         client.read(buffer);
         String request = new String(buffer.array()).trim();
         LOGGER.info("Request is received : " + request);

@@ -1,13 +1,10 @@
 package edu.hw8.task2;
 
 import edu.hw8.task1.QuoteClient;
+import java.io.IOException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.Test;
-import java.io.IOException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ForkJoinPool;
 
 public class FixedThreadPoolTest {
 
