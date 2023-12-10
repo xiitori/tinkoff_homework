@@ -27,9 +27,10 @@ public class Finder {
 
     private class TreeChecker extends RecursiveTask<Integer> {
 
+        private static final int MAX_FILES = 1000;
         private final Path root;
 
-        public TreeChecker(Path root) {
+        private TreeChecker(Path root) {
             this.root = root;
         }
 
@@ -58,7 +59,7 @@ public class Finder {
                 int res = task.join();
                 countFiles += res;
             }
-            if (countFiles > 1000) {
+            if (countFiles > MAX_FILES) {
                 map.put(this.root, countFiles);
             }
 
