@@ -47,7 +47,7 @@ public class SingleRenderer implements Renderer {
                 Point newPoint = transformation.apply(affine.apply(oldPoint));
 
                 double theta = 0.0;
-                for (int s = 0; s < 4; theta += Math.PI * 2 / 4, s++) {
+                for (int s = 0; s < symmetry; theta += Math.PI * 2 / symmetry, s++) {
                     newPoint = new SymmetryTransformation().apply(newPoint, theta);
 
                     newX = newPoint.x();
