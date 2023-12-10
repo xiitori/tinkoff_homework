@@ -9,17 +9,21 @@ import edu.project4.transformation.Transformation;
 import java.util.List;
 
 public interface Renderer {
+
+    double X_MIN = -1.777;
+    double X_MAX = 1.777;
+    double Y_MIN = -1;
+    double Y_MAX = 1;
+
+    @SuppressWarnings("ParameterNumber")
     FractalImage render(
-            double XMin,
-            double XMax,
-            double YMin,
-            double YMax,
-            Resolution resolution,
-            int symmetry,
-            int samples,
-            int iterations,
-            List<AffineTransformation> affines,
-            List<Transformation> transformations);
+        Resolution resolution,
+        int symmetry,
+        int samples,
+        int iterations,
+        List<AffineTransformation> affines,
+        List<Transformation> transformations
+    );
 
     default Pixel.Color updateColor(Color old, Color affine) {
         int newRed = ((old.r() + affine.r()) / 2);

@@ -25,10 +25,6 @@ public class MultiRenderer implements Renderer {
 
     @Override
     public FractalImage render(
-        double XMin,
-        double XMax,
-        double YMin,
-        double YMax,
         Resolution resolution,
         int symmetry,
         int samples,
@@ -38,10 +34,7 @@ public class MultiRenderer implements Renderer {
     ) {
         ExecutorService service = Executors.newFixedThreadPool(countThreads);
 
-        Callable<FractalImage> task = () -> new SingleRenderer().render(XMin,
-            XMax,
-            YMin,
-            YMax,
+        Callable<FractalImage> task = () -> new SingleRenderer().render(
             resolution,
             symmetry,
             samples / countThreads,
