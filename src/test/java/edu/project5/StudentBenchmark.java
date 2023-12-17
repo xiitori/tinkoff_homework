@@ -6,6 +6,8 @@ import java.lang.invoke.MethodHandles;
 import java.lang.invoke.MethodType;
 import java.lang.reflect.Method;
 import java.util.concurrent.TimeUnit;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
 import org.openjdk.jmh.annotations.Mode;
@@ -23,6 +25,8 @@ import org.openjdk.jmh.runner.options.OptionsBuilder;
 @OutputTimeUnit(TimeUnit.NANOSECONDS)
 @State(Scope.Benchmark)
 public class StudentBenchmark {
+
+    private static final Logger LOGGER = LogManager.getLogger();
 
     public static void main(String[] args) throws RunnerException {
         Options options = new OptionsBuilder()
@@ -45,14 +49,14 @@ public class StudentBenchmark {
         try {
             method = Student.class.getMethod("name");
         } catch (Throwable e) {
-            method = null;
+            LOGGER.info(e);
         }
 
         try {
             MethodHandles.Lookup lookup = MethodHandles.lookup();
             methodHandle = lookup.findVirtual(Student.class, "name", MethodType.methodType(String.class));
         } catch (Throwable e) {
-            methodHandle = null;
+            LOGGER.info(e);
         }
 
         try {
@@ -71,7 +75,7 @@ public class StudentBenchmark {
                 dynamic
             ).getTarget().invokeExact();
         } catch (Throwable e) {
-            getter = null;
+            LOGGER.info(e);
         }
 
         student = new Student("Nikola", "Tesla");
